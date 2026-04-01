@@ -137,8 +137,9 @@ body {
         @foreach($stylists as $stylist)
 
             @php
+
                 $file = $stylist->image;
-                $url = asset('storage/'.$file);
+                $url = asset('images/'.$file);
                 $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             @endphp
 
