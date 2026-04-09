@@ -32,13 +32,27 @@
                 Styling
             </a>
 
-            <!-- ✅ YENİ EKLENEN -->
             <a href="{{ route('admin.getthelook') }}" class="hover:bg-gray-800 p-3 rounded">
                 GET THE LOOK
             </a>
 
             <a href="{{ route('admin.seo') }}" class="hover:bg-gray-800 p-3 rounded">
                 Seo Ayarları
+            </a>
+
+            <!-- 🔥 MAIL PANEL -->
+            <a href="{{ route('admin.mail') }}" class="hover:bg-gray-800 p-3 rounded">
+                Mail Gönder
+            </a>
+
+            <!-- 🔍 MÜŞTERİ ARA -->
+            <a href="/admin/leads" class="hover:bg-gray-800 p-3 rounded">
+                Müşteri Ara
+            </a>
+
+            <!-- 📋 YENİ EKLENDİ -->
+            <a href="/admin/leads-list" class="hover:bg-gray-800 p-3 rounded">
+                Müşteri Listesi
             </a>
 
         </nav>

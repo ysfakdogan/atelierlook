@@ -19,13 +19,12 @@ body {
     color:white;
 }
 
-/* 🔥 SADECE NAVBAR SİYAH (KESİN ÇÖZÜM) */
+/* NAVBAR */
 .navbar,
 .navbar * {
     background: black !important;
 }
 
-/* NAVBAR (partials ile uyumlu) */
 .navbar {
     position: fixed;
     top:0;
@@ -55,10 +54,6 @@ body {
     text-decoration:none;
     font-size:11px;
     letter-spacing:2px;
-}
-
-.nav-links a:visited {
-    color:white;
 }
 
 /* CONTENT */
@@ -93,18 +88,6 @@ body {
     display:block;
 }
 
-/* ❌ HOVER BÜYÜME KALDIRILDI */
-.card:hover img,
-.card:hover video {
-    transform:none;
-}
-
-/* ❌ VIEW TAMAMEN KALDIRILDI */
-.card::after {
-    content:"";
-    display:none;
-}
-
 /* MOBILE */
 @media(max-width:900px){
     .grid{
@@ -137,15 +120,14 @@ body {
         @foreach($stylists as $stylist)
 
             @php
-
                 $file = $stylist->image;
-                $url = asset('images/'.$file);
+                $url = $file ? asset('storage/'.$file) : asset('images/placeholder.jpg');
                 $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             @endphp
 
             <div class="card">
 
-                @if(in_array($ext, ['mp4','webm']))
+                @if($file && in_array($ext, ['mp4','webm']))
                     <video autoplay muted loop playsinline>
                         <source src="{{ $url }}" type="video/{{ $ext }}">
                     </video>

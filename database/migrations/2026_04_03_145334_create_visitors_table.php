@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('campaigns', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('subtitle')->nullable();
-            $table->text('description');
-            $table->string('image_path');
-            $table->string('season')->nullable();
+
+            // 🔥 ZİYARETÇİ IP
+            $table->string('ip');
+
+            // 🕒 TARİHLER
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('campaigns');
+        Schema::dropIfExists('visitors');
     }
 };

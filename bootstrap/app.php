@@ -12,8 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
 
+        // 🔥 ZİYARETÇİ SAYACI MIDDLEWARE
         $middleware->web(append: [
-            \App\Http\Middleware\CountSiteViews::class,
+            \App\Http\Middleware\TrackVisitor::class,
         ]);
 
     })
