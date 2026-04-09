@@ -29,7 +29,7 @@ nav a{
 
 /* HEADER */
 .header{
-    padding:120px 40px 40px; /* navbar boşluğu */
+    padding:120px 40px 40px;
 }
 
 .header h1{
@@ -44,22 +44,28 @@ nav a{
     margin-top:8px;
 }
 
-/* GRID */
+/* 🔥 GRID (bozulmadı, sadece güçlendirildi) */
 .grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:20px;
+    padding:0 40px 40px;
+    width:100%;
 }
 
+/* 🔥 CARD (yükseklik optimize edildi) */
 .card{
     position:relative;
-    height:80vh;
+    height:70vh; /* 80vh → biraz küçülttük */
     overflow:hidden;
 }
 
+/* IMAGE */
 .card img{
     width:100%;
     height:100%;
     object-fit:cover;
+    object-position:center; /* 🔥 yeni: crop ortadan */
     transition:0.6s;
 }
 
@@ -88,7 +94,7 @@ nav a{
     }
 
     .card{
-        height:60vh;
+        height:50vh;
     }
 }
 </style>
