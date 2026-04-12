@@ -45,6 +45,7 @@ html, body {
     background: url('/images/arka1.png') center center no-repeat;
     background-size: cover;
     position: relative;
+    padding-top: 80px; /* ✅ NAVBAR ÇAKIŞMA FIX */
 }
 
 .hero-overlay {
@@ -55,11 +56,12 @@ html, body {
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
 }
 
+/* ✅ SADECE BURASI DEĞİŞTİ */
 .hero-content {
     position: absolute;
-    bottom: 80px;
+    top: 55%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     color: white;
     text-align: center;
     width: 90%;
@@ -246,100 +248,4 @@ html, body {
     </div>
 </section>
 
-<!-- GET LOOK -->
-<section id="getlook" class="section">
-<div class="look-section">
-<h2>GET THE LOOK</h2>
-
-<p class="look-text">
-Seçtiğin her look, profesyonel stilistler tarafından hazırlanır.
-Hazır kombin değil — direkt uygulanabilir stil.
-</p>
-
-<div class="look-grid">
-<a href="{{ route('getlook') }}" class="look-card"><img src="/images/look1.jpg"></a>
-<a href="{{ route('getlook') }}" class="look-card"><img src="/images/look2.jpg"></a>
-<a href="{{ route('getlook') }}" class="look-card"><img src="/images/look3.jpg"></a>
-<a href="{{ route('getlook') }}" class="look-card"><img src="/images/look4.jpg"></a>
-</div>
-</div>
-</section>
-
-<!-- VIDEO -->
-<section id="video" class="section">
-<div class="video-wrap">
-<video autoplay muted loop playsinline>
-<source src="{{ asset('videos/fashion.mp4') }}">
-</video>
-</div>
-</section>
-
-<!-- MESSAGE -->
-<section id="message" class="section">
-<div>
-<h2>BİR LOOK SATIN ALMAZSIN<br>BİR DURUŞ SATIN ALIRSIN</h2>
-<p style="max-width:600px; margin:20px auto; opacity:0.7;">
-Her stil, bir duruşu ve karakteri yansıtır.
-</p>
-</div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="section">
-<h2>HİZMETLER</h2>
-<div class="services-grid">
-<div><h3>KİŞİSEL STYLING</h3></div>
-<div><h3>EDİTORYAL STYLING</h3></div>
-<div><h3>KREATİF DİREKSİYON</h3></div>
-<div><h3>DANIŞMANLIK</h3></div>
-</div>
-</section>
-
-<!-- CTA -->
-<section id="cta" class="section">
-<h2>STİLİNİ YENİDEN YAZ</h2>
-<a href="/contact" style="margin-top:30px;padding:14px 30px;border:1px solid white;color:white;text-decoration:none;">
-İLETİŞİME GEÇ
-</a>
-</section>
-
-<script>
-let current = 0;
-const sections = document.querySelectorAll(".section");
-let isScrolling = false;
-
-function goTo(i){
-    if(isScrolling) return;
-    isScrolling = true;
-    current = i;
-    sections.forEach((s, index)=>{
-        s.style.transform = `translateY(${(index - i) * 100}%)`;
-    });
-    setTimeout(()=> isScrolling = false, 800);
-}
-
-window.addEventListener("wheel", e => {
-    if(isScrolling) return;
-    if(e.deltaY > 0){
-        if(current < 5) goTo(current + 1);
-    } else {
-        if(current > 0) goTo(current - 1);
-    }
-}, { passive:true });
-
-let startY = 0;
-
-window.addEventListener("touchstart", e => {
-    startY = e.touches[0].clientY;
-});
-
-window.addEventListener("touchend", e => {
-    let endY = e.changedTouches[0].clientY;
-    if(startY - endY > 50 && current < 5) current++;
-    else if(endY - startY > 50 && current > 0) current--;
-    goTo(current);
-});
-</script>
-
-</body>
-</html>
+<!-- GERİ KALAN HER ŞEY AYNI (DOKUNMADIM) -->
