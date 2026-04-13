@@ -22,6 +22,10 @@
 @vite(['resources/css/app.css','resources/js/app.js'])
 
 <style>
+html {
+    scroll-behavior: smooth;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -29,23 +33,19 @@ html, body {
     font-family: sans-serif;
 }
 
+/* ✅ FIXED SİSTEM KALDIRILDI */
 .section {
-    position: fixed;
+    position: relative;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    top: 0;
-    left: 0;
-    transition: transform 0.7s ease;
+    min-height: 100vh;
 }
 
 /* HOME */
 #home {
-    transform: translateY(0%);
     background: url('/images/arka1.png') center center no-repeat;
     background-size: cover;
     position: relative;
-    padding-top: 80px; /* ✅ NAVBAR ÇAKIŞMA FIX */
+    padding-top: 80px;
 }
 
 .hero-overlay {
@@ -56,7 +56,6 @@ html, body {
     background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
 }
 
-/* ✅ SADECE BURASI DEĞİŞTİ */
 .hero-content {
     position: absolute;
     top: 55%;
@@ -100,15 +99,15 @@ html, body {
 
 /* GET LOOK */
 #getlook {
-    transform: translateY(100%);
     background: black;
 }
 
 .look-section {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     color: white;
     position: relative;
+    padding-top: 100px;
 }
 
 .look-section h2 {
@@ -132,14 +131,13 @@ html, body {
 .look-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height: 100%;
+    min-height: 100vh;
 }
 
 .look-card {
     position: relative;
     overflow: hidden;
     display: block;
-    height: 100%;
 }
 
 .look-card img {
@@ -155,7 +153,6 @@ html, body {
 
 /* VIDEO */
 #video {
-    transform: translateY(200%);
     background: white;
     display: flex;
     flex-direction: column;
@@ -176,19 +173,18 @@ html, body {
 
 /* MESSAGE */
 #message {
-    transform: translateY(300%);
     background:black;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     color:white;
-    padding:20px;
+    padding:60px 20px;
+    min-height: 100vh;
 }
 
 /* SERVICES */
 #services {
-    transform: translateY(400%);
     background:white;
     color:black;
     display:flex;
@@ -196,6 +192,7 @@ html, body {
     justify-content:center;
     align-items:center;
     padding:60px 20px;
+    min-height: 100vh;
 }
 
 .services-grid{
@@ -208,7 +205,6 @@ html, body {
 
 /* CTA */
 #cta {
-    transform: translateY(500%);
     background:black;
     color:white;
     display:flex;
@@ -216,12 +212,17 @@ html, body {
     justify-content:center;
     align-items:center;
     text-align:center;
+    min-height: 100vh;
 }
 
 /* MOBILE */
 @media(max-width:768px){
     .look-grid { grid-template-columns:1fr; }
     .services-grid { grid-template-columns:1fr; }
+
+    .hero-content {
+        top: 50%;
+    }
 }
 </style>
 
@@ -244,8 +245,12 @@ html, body {
         Biz sadece giydirmiyoruz — kimlik inşa ediyoruz.
         </p>
 
-        <a href="javascript:void(0)" class="hero-btn" onclick="goTo(1)">VIEW WORK</a>
+        <!-- ✅ FIX -->
+        <a href="#getlook" class="hero-btn">VIEW WORK</a>
     </div>
 </section>
 
-<!-- GERİ KALAN HER ŞEY AYNI (DOKUNMADIM) -->
+<!-- BURADAN SONRA SENİN DİĞER SECTIONLARIN AYNI ŞEKİLDE DEVAM EDECEK -->
+
+</body>
+</html>
