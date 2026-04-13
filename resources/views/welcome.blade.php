@@ -22,23 +22,29 @@
 @vite(['resources/css/app.css','resources/js/app.js'])
 
 <style>
-html {
-    scroll-behavior: smooth;
-}
-
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: sans-serif;
 }
 
-/* ✅ FIXED SİSTEM KALDIRILDI */
+/* 🔥 FULLPAGE SYSTEM GERİ GELDİ */
 .section {
-    position: relative;
+    position: fixed;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: transform 0.7s ease;
 }
+
+#home { transform: translateY(0%); }
+#getlook { transform: translateY(100%); }
+#video { transform: translateY(200%); }
+#message { transform: translateY(300%); }
+#services { transform: translateY(400%); }
+#cta { transform: translateY(500%); }
 
 /* HOME */
 #home {
@@ -97,133 +103,13 @@ html, body {
     color: black;
 }
 
-/* GET LOOK */
-#getlook {
-    background: black;
-}
+/* DİĞER SECTIONLAR (boş ama sistem çalışır) */
+#getlook { background:black; }
+#video { background:white; }
+#message { background:black; }
+#services { background:white; }
+#cta { background:black; }
 
-.look-section {
-    width: 100%;
-    min-height: 100vh;
-    color: white;
-    position: relative;
-    padding-top: 100px;
-}
-
-.look-section h2 {
-    position: absolute;
-    top: 80px;
-    left: 20px;
-    font-size: 24px;
-    letter-spacing: 3px;
-}
-
-.look-text {
-    position: absolute;
-    top: 120px;
-    left: 20px;
-    max-width: 300px;
-    opacity: 0.6;
-    line-height: 1.5;
-    font-size: 12px;
-}
-
-.look-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    min-height: 100vh;
-}
-
-.look-card {
-    position: relative;
-    overflow: hidden;
-    display: block;
-}
-
-.look-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.6s;
-}
-
-.look-card:hover img {
-    transform: scale(1.08);
-}
-
-/* VIDEO */
-#video {
-    background: white;
-    display: flex;
-    flex-direction: column;
-}
-
-.video-wrap {
-    position: relative;
-    width: 100%;
-    height: 40vh;
-    overflow: hidden;
-}
-
-.video-wrap video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* MESSAGE */
-#message {
-    background:black;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:white;
-    padding:60px 20px;
-    min-height: 100vh;
-}
-
-/* SERVICES */
-#services {
-    background:white;
-    color:black;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:60px 20px;
-    min-height: 100vh;
-}
-
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:30px;
-    max-width:1000px;
-    margin-top:40px;
-}
-
-/* CTA */
-#cta {
-    background:black;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    min-height: 100vh;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    .look-grid { grid-template-columns:1fr; }
-    .services-grid { grid-template-columns:1fr; }
-
-    .hero-content {
-        top: 50%;
-    }
-}
 </style>
 
 </head>
@@ -245,12 +131,36 @@ html, body {
         Biz sadece giydirmiyoruz — kimlik inşa ediyoruz.
         </p>
 
-        <!-- ✅ FIX -->
-        <a href="#getlook" class="hero-btn">VIEW WORK</a>
+        <a href="javascript:void(0)" onclick="goTo(1)" class="hero-btn">VIEW WORK</a>
     </div>
 </section>
 
-<!-- BURADAN SONRA SENİN DİĞER SECTIONLARIN AYNI ŞEKİLDE DEVAM EDECEK -->
+<section id="getlook" class="section"></section>
+<section id="video" class="section"></section>
+<section id="message" class="section"></section>
+<section id="services" class="section"></section>
+<section id="cta" class="section"></section>
+
+<script>
+let current = 0;
+const sections = document.querySelectorAll(".section");
+
+function goTo(index) {
+    current = index;
+
+    sections.forEach((sec, i) => {
+        sec.style.transform = `translateY(${(i - current) * 100}%)`;
+    });
+}
+
+window.addEventListener("wheel", (e) => {
+    if (e.deltaY > 0 && current < sections.length - 1) {
+        goTo(current + 1);
+    } else if (e.deltaY < 0 && current > 0) {
+        goTo(current - 1);
+    }
+});
+</script>
 
 </body>
 </html>
