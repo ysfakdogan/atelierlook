@@ -5,7 +5,7 @@
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold">Get The Look</h2>
 
-    <button onclick="openModal()" class="bg-black text-white px-4 py-2 rounded hover:opacity-90">
+    <button type="button" onclick="openModal()" class="bg-black text-white px-4 py-2 rounded hover:opacity-90">
         + Yeni Look
     </button>
 </div>
@@ -35,14 +35,16 @@
                     </td>
 
                     <td class="py-3 text-sm">
-                        <form action="#" method="POST">
+
+                        <form action="{{ route('admin.getthelook.delete', $look->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button class="text-red-500 hover:underline">
+                            <button type="submit" class="text-red-500 hover:underline">
                                 Sil
                             </button>
                         </form>
+
                     </td>
 
                 </tr>
@@ -64,7 +66,7 @@
 
     <div class="bg-white p-6 rounded-xl w-full max-w-md relative shadow-lg">
 
-        <button onclick="closeModal()"
+        <button type="button" onclick="closeModal()"
                 class="absolute top-3 right-3 text-gray-500 text-lg">
             ✕
         </button>
@@ -74,10 +76,12 @@
         <form action="{{ route('admin.getthelook.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <!-- SADECE GÖRSEL -->
-            <input type="file"
-                   name="image"
-                   required
+            <input type="hidden" name="type" value="look">
+
+            <input type="file" name="image"
+                   class="w-full border p-2 mb-4 rounded">
+
+            <input type="file" name="video"
                    class="w-full border p-2 mb-4 rounded">
 
             <button type="submit"

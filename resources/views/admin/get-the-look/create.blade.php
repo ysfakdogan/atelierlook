@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -57,7 +58,8 @@
             text-align:center;
         }
 
-        .preview img{
+        .preview img,
+        .preview video{
             max-width:100%;
             border-radius:8px;
         }
@@ -69,7 +71,6 @@
             color:black;
             font-size:14px;
         }
-
     </style>
 </head>
 <body>
@@ -80,7 +81,6 @@
 
     <h1>GET THE LOOK EKLE</h1>
 
-    {{-- HATA MESAJLARI --}}
     @if ($errors->any())
         <div style="margin-bottom:20px;color:red;">
             @foreach ($errors->all() as $error)
@@ -92,36 +92,47 @@
     <form action="{{ route('admin.getthelook.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
+        <!-- 🔥 KRİTİK EKLEME -->
+        <input type="hidden" name="type" value="look">
+
         <input type="text" name="title" placeholder="Başlık (opsiyonel)">
 
         <input type="file" name="image" id="imageInput" required>
 
+        <input type="file" name="video" id="videoInput" accept="video/*">
+
         <button type="submit">KAYDET</button>
     </form>
 
-    {{-- GÖRSEL PREVIEW --}}
     <div class="preview" id="preview"></div>
 
 </div>
 
 <script>
-    const input = document.getElementById('imageInput');
+    const imageInput = document.getElementById('imageInput');
+    const videoInput = document.getElementById('videoInput');
     const preview = document.getElementById('preview');
 
-    input.addEventListener('change', function(){
+    imageInput.addEventListener('change', function(){
         const file = this.files[0];
-
         if(file){
             const reader = new FileReader();
-
             reader.onload = function(e){
                 preview.innerHTML = `<img src="${e.target.result}" />`;
             }
-
             reader.readAsDataURL(file);
+        }
+    });
+
+    videoInput.addEventListener('change', function(){
+        const file = this.files[0];
+        if(file){
+            const url = URL.createObjectURL(file);
+            preview.innerHTML = `<video controls src="${url}"></video>`;
         }
     });
 </script>
 
 </body>
 </html>
+```

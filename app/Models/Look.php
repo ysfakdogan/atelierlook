@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Look extends Model
 {
-    protected $fillable = ['image'];
+    protected $fillable = ['image','video','title'];
 }

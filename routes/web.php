@@ -123,34 +123,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/mail/send', [MailController::class, 'send'])->name('mail.send');
 
 
-    // =========================
-    // 🔥 LEAD AV SİSTEMİ
-    // =========================
     Route::get('/lead-search', [LeadSearchController::class, 'index'])->name('lead.search');
     Route::post('/lead-search', [LeadSearchController::class, 'search'])->name('lead.search.run');
     Route::post('/lead-store', [LeadSearchController::class, 'store'])->name('lead.store');
 
-
-    // =========================
-    // 🔥 ARAMA SAYFASI
-    // =========================
     Route::get('/leads', [LeadSearchController::class, 'index'])->name('lead.list');
 
-
-    // =========================
-    // 🔥 CRM PANEL
-    // =========================
     Route::get('/leads-list', [LeadSearchController::class, 'list'])
         ->name('lead.list.page');
 
-    // 🔥 YENİ: SİLME
     Route::delete('/lead-delete/{id}', [LeadSearchController::class, 'destroy'])
         ->name('lead.delete');
 
 
-    // =========================
     // STYLISTS
-    // =========================
     Route::get('/stylists', [AdminStylistController::class,'index'])->name('stylist.index');
     Route::get('/stylists/create', [AdminStylistController::class,'create'])->name('stylist.create');
     Route::post('/stylists', [AdminStylistController::class,'store'])->name('stylist.store');
@@ -179,6 +165,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     })->name('styling.store');
 
+
+    // 🔥 GET THE LOOK
     Route::get('/get-the-look', function () {
 
         $looks = Look::latest()->get();
@@ -187,21 +175,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     })->name('getthelook');
 
-    Route::post('/get-the-look', function (\Illuminate\Http\Request $request) {
+    Route::post('/get-the-look', [UploadController::class, 'store'])
+        ->name('getthelook.store');
 
-        $request->validate([
-            'image' => 'required|image'
-        ]);
+    // ✅ EKLENEN DELETE ROUTE
+    Route::delete('/get-the-look/{id}', function($id){
+        \App\Models\Look::find($id)?->delete();
+        return back();
+    })->name('getthelook.delete');
 
-        $path = $request->file('image')->store('looks', 'public');
-
-        Look::create([
-            'image' => $path
-        ]);
-
-        return redirect()->route('admin.getthelook');
-
-    })->name('getthelook.store');
 
     Route::get('/settings', [SeoController::class, 'index'])->name('settings');
     Route::post('/settings', [SeoController::class, 'store'])->name('settings.store');

@@ -1,166 +1,364 @@
+```html id="atelierlook_fullpage"
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-@php
-    $seo = \App\Models\SeoSetting::first();
-@endphp
-
-<title>{{ $seo->title ?? 'ATELIERLOOK' }}</title>
-
-<meta name="description" content="{{ $seo->description ?? '' }}">
-<meta name="keywords" content="{{ $seo->keywords ?? '' }}">
-
-<meta property="og:title" content="{{ $seo->og_title ?? '' }}">
-<meta property="og:description" content="{{ $seo->og_description ?? '' }}">
-<meta property="og:image" content="{{ $seo->og_image ?? '' }}">
-<meta property="og:type" content="website">
-
-@vite(['resources/css/app.css','resources/js/app.js'])
+<title>ATELIERLOOK</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: sans-serif;
+:root{
+--nav-h:80px;
 }
 
-/* 🔥 FULLPAGE SYSTEM GERİ GELDİ */
-.section {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    transition: transform 0.7s ease;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-#home { transform: translateY(0%); }
-#getlook { transform: translateY(100%); }
-#video { transform: translateY(200%); }
-#message { transform: translateY(300%); }
-#services { transform: translateY(400%); }
-#cta { transform: translateY(500%); }
-
-/* HOME */
-#home {
-    background: url('/images/arka1.png') center center no-repeat;
-    background-size: cover;
-    position: relative;
-    padding-top: 80px;
+html,body{
+font-family:sans-serif;
+background:#fff;
+overflow-x:hidden;
 }
 
-.hero-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 25%;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+/* SECTION */
+.section{
+width:100%;
 }
 
-.hero-content {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    width: 90%;
+/* HERO */
+#home{
+height:100vh;
+padding-top:var(--nav-h);
+background:url('/images/arka1.png') center/cover no-repeat;
+position:relative;
+overflow:hidden;
 }
 
-.hero-content h1 {
-    font-size: clamp(28px, 8vw, 64px);
-    letter-spacing: 8px;
-    font-weight: 300;
-    margin: 0;
+.hero-overlay{
+position:absolute;
+bottom:0;
+width:100%;
+height:30%;
+background:linear-gradient(to top,rgba(0,0,0,.9),transparent);
 }
 
-.hero-content p {
-    margin-top: 12px;
-    font-size: clamp(12px, 3.5vw, 14px);
-    letter-spacing: 2px;
-    opacity: 0.75;
+.hero-content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:#fff;
+text-align:center;
+width:90%;
 }
 
-.hero-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 28px;
-    border: 1px solid white;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 2px;
-    transition: 0.3s;
+.hero-content h1{
+font-size:clamp(48px,10vw,120px);
+letter-spacing:12px;
+font-weight:200;
 }
 
-.hero-btn:hover {
-    background: white;
-    color: black;
+.hero-content p{
+margin-top:15px;
+font-size:14px;
+letter-spacing:3px;
+opacity:.7;
 }
 
-/* DİĞER SECTIONLAR (boş ama sistem çalışır) */
-#getlook { background:black; }
-#video { background:white; }
-#message { background:black; }
-#services { background:white; }
-#cta { background:black; }
+.hero-btn{
+display:inline-block;
+margin-top:25px;
+padding:12px 28px;
+border:1px solid #fff;
+color:#fff;
+text-decoration:none;
+font-size:12px;
+letter-spacing:2px;
+}
 
+/* 🔥 INTRO */
+.intro{
+padding:120px 20px;
+text-align:center;
+font-size:20px;
+max-width:800px;
+margin:auto;
+line-height:1.6;
+}
+
+/* 🔥 SERVICES */
+.services{
+padding:80px 20px;
+text-align:center;
+font-size:18px;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+/* 🔥 TITLE */
+.section-title{
+font-size:28px;
+padding:60px 20px 20px;
+font-weight:600;
+text-align:center;
+}
+
+/* GRID */
+.look-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+}
+
+.look-grid img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+/* BAR */
+.bar{
+background:#000;
+color:#fff;
+padding:20px;
+font-size:32px;
+font-weight:700;
+}
+
+/* SLIDER */
+.look-slider{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:30px 20px;
+cursor:grab;
+user-select:none;
+}
+
+.look-slider.dragging{
+cursor:grabbing;
+}
+
+.look-slider::-webkit-scrollbar{
+display:none;
+}
+
+.product{
+min-width:420px;
+height:520px;
+}
+
+.product img{
+width:100%;
+height:100%;
+object-fit:cover;
+pointer-events:none;
+}
+
+/* 🎬 VIDEO */
+.video-section{
+width:100%;
+height:70vh;
+overflow:hidden;
+background:#000;
+position:relative;
+display:flex;
+align-items:flex-start;
+}
+
+.bg-video{
+width:100%;
+height:120%;
+object-fit:cover;
+transform:translateY(-10%);
+}
+
+/* VIDEO TEXT */
+.video-overlay{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:#fff;
+font-size:40px;
+letter-spacing:4px;
+text-align:center;
+}
+
+/* 🔥 CTA */
+.cta{
+padding:120px 20px;
+text-align:center;
+}
+
+.cta p{
+font-size:22px;
+margin-bottom:20px;
+}
+
+.cta a{
+text-decoration:none;
+border:1px solid #000;
+padding:12px 30px;
+font-size:14px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+:root{
+--nav-h:70px;
+}
+
+.look-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.product{
+min-width:260px;
+height:340px;
+}
+
+.hero-content h1{
+font-size:42px;
+letter-spacing:6px;
+}
+
+.video-overlay{
+font-size:24px;
+}
+
+}
 </style>
-
 </head>
 
 <body>
 
 @include('partials.navbar')
 
-<!-- HOME -->
+<!-- HERO -->
 <section id="home" class="section">
-    <div class="hero-overlay"></div>
+<div class="hero-overlay"></div>
 
-    <div class="hero-content">
-        <h1>ATELIERLOOK</h1>
-        <p>Fashion Direction / Styling / Collection Development</p>
-
-        <p style="margin-top:18px; opacity:0.6; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.6;">
-        Her look bir kombin değil, bir karakterdir.
-        Biz sadece giydirmiyoruz — kimlik inşa ediyoruz.
-        </p>
-
-        <a href="javascript:void(0)" onclick="goTo(1)" class="hero-btn">VIEW WORK</a>
-    </div>
+<div class="hero-content">
+<h1>ATELIERLOOK</h1>
+<p>Fashion Direction / Styling / Collection Development</p>
+<a href="#" class="hero-btn">VIEW WORK</a>
+</div>
 </section>
 
-<section id="getlook" class="section"></section>
-<section id="video" class="section"></section>
-<section id="message" class="section"></section>
-<section id="services" class="section"></section>
-<section id="cta" class="section"></section>
+<!-- INTRO -->
+<section class="intro">
+<p>
+We shape visual identity through styling, casting and creative direction.<br>
+Each project is built around narrative, silhouette and material.
+</p>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+<p>Creative Direction</p>
+<p>Styling</p>
+<p>Lookbook Development</p>
+<p>Campaign Production</p>
+</section>
+
+<!-- GET LOOK -->
+<section id="getlook" class="section">
+
+<h2 class="section-title">Selected Work</h2>
+
+<div class="look-grid">
+<a href="/get-the-look"><img src="/images/look1.jpg"></a>
+<a href="/get-the-look"><img src="/images/look2.jpg"></a>
+<a href="/get-the-look"><img src="/images/look3.jpg"></a>
+<a href="/get-the-look"><img src="/images/look4.jpg"></a>
+</div>
+
+<div class="bar">GET THE LOOK</div>
+
+<div class="look-slider" id="slider">
+<div class="product"><img src="/images/p1.jpg"></div>
+<div class="product"><img src="/images/p2.jpg"></div>
+<div class="product"><img src="/images/p3.jpg"></div>
+<div class="product"><img src="/images/p4.jpg"></div>
+<div class="product"><img src="/images/p5.jpg"></div>
+</div>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="/videos/fashion.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-overlay">
+    <h2>New Visual Direction</h2>
+  </div>
+</section>
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+<p>Available for projects</p>
+<a href="/contact">Contact</a>
+</section>
 
 <script>
-let current = 0;
-const sections = document.querySelectorAll(".section");
+const slider = document.getElementById('slider');
 
-function goTo(index) {
-    current = index;
+let isDown = false;
+let startX;
+let scrollLeft;
+let velocity = 0;
+let raf;
 
-    sections.forEach((sec, i) => {
-        sec.style.transform = `translateY(${(i - current) * 100}%)`;
-    });
-}
-
-window.addEventListener("wheel", (e) => {
-    if (e.deltaY > 0 && current < sections.length - 1) {
-        goTo(current + 1);
-    } else if (e.deltaY < 0 && current > 0) {
-        goTo(current - 1);
-    }
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('dragging');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  cancelAnimationFrame(raf);
 });
+
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.classList.remove('dragging');
+});
+
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.classList.remove('dragging');
+  inertia();
+});
+
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+
+  e.preventDefault();
+
+  const x = e.pageX - slider.offsetLeft;
+  const walk = x - startX;
+
+  slider.scrollLeft = scrollLeft - walk;
+  velocity = walk;
+});
+
+function inertia(){
+  velocity *= 0.95;
+  slider.scrollLeft -= velocity * 0.1;
+
+  if(Math.abs(velocity) > 0.5){
+    raf = requestAnimationFrame(inertia);
+  }
+}
 </script>
 
 </body>
 </html>
+```

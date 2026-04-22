@@ -12,7 +12,7 @@ background: {{ $isDark ? 'black' : 'white' }};
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 20px;
+padding:20px 20px; /* ✅ DÜZELTİLDİ */
 box-shadow:0 2px 10px rgba(0,0,0,0.05);
 ">
 
@@ -31,8 +31,10 @@ box-shadow:0 2px 10px rgba(0,0,0,0.05);
     <div id="hamburger" style="
     font-size:22px;
     cursor:pointer;
-    display:none;
     color: {{ $isDark ? 'white' : 'black' }};
+    margin-left:auto;
+    position:relative;
+    z-index:100000;
     ">
         ☰
     </div>
@@ -45,12 +47,12 @@ box-shadow:0 2px 10px rgba(0,0,0,0.05);
     font-size:12px;
     letter-spacing:2px;
     text-transform:uppercase;
+    z-index:9999;
     ">
 
         <a href="/about" style="color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Hakkında</a>
         <a href="/stilist" style="color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Stylist</a>
 
-        <!-- DROPDOWN -->
         <div id="dropdown" style="position:relative;">
 
             <span style="cursor:pointer; color: {{ $isDark ? 'white' : 'black' }};">
@@ -68,11 +70,11 @@ box-shadow:0 2px 10px rgba(0,0,0,0.05);
                 min-width:200px;
             ">
 
-                <a href="#" style="display:block; padding:10px; color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Yapay Zeka Fotoğrafları</a>
-                <a href="#" style="display:block; padding:10px; color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Stüdyo</a>
-                <a href="#" style="display:block; padding:10px; color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Web Shoot</a>
-                <a href="#" style="display:block; padding:10px; color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Editöryal</a>
-                <a href="#" style="display:block; padding:10px; color: {{ $isDark ? 'white' : 'black' }}; text-decoration:none;">Sosyal Medya</a>
+                <a href="#" style="display:block; padding:10px;">Yapay Zeka Fotoğrafları</a>
+                <a href="#" style="display:block; padding:10px;">Stüdyo</a>
+                <a href="#" style="display:block; padding:10px;">Web Shoot</a>
+                <a href="#" style="display:block; padding:10px;">Editöryal</a>
+                <a href="#" style="display:block; padding:10px;">Sosyal Medya</a>
 
             </div>
 
@@ -85,16 +87,15 @@ box-shadow:0 2px 10px rgba(0,0,0,0.05);
 </nav>
 
 <style>
-/* ALT ÇİZGİYİ TAMAMEN KALDIR */
-#menu a,
-#menu a:visited,
-#menu a:hover {
-    text-decoration: none !important;
+#menu a{
+    text-decoration:none !important;
+}
+#menu a:hover{
+    opacity:0.6;
 }
 
-/* HOVER */
-#menu a:hover {
-    opacity: 0.6;
+#hamburger{
+    display:none;
 }
 
 /* MOBILE */
@@ -105,20 +106,21 @@ box-shadow:0 2px 10px rgba(0,0,0,0.05);
     }
 
     #menu{
-        position:absolute;
-        top:70px;
-        left:0;
+        position:fixed;
+        top:0;
+        left:-100%;
         width:100%;
+        height:100vh;
         background: inherit;
         flex-direction:column;
         align-items:flex-start;
-        padding:20px;
-        display:none;
+        padding:80px 20px 20px; /* ✅ DÜZELTİLDİ */
+        transition:0.3s;
+        display:flex;
     }
 
-    #menu a{
-        padding:10px 0;
-        width:100%;
+    #menu.active{
+        left:0;
     }
 
     #submenu{
@@ -136,12 +138,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropdown = document.getElementById('dropdown');
     const submenu = document.getElementById('submenu');
 
-    // MOBILE MENU
     hamburger.addEventListener('click', function () {
-        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        menu.classList.toggle('active');
+
+        // 🔥 body scroll kilitle
+        document.body.style.overflow =
+            menu.classList.contains('active') ? 'hidden' : 'auto';
     });
 
-    // DESKTOP HOVER
     dropdown.addEventListener('mouseenter', () => {
         if(window.innerWidth > 768){
             submenu.style.display = 'block';
@@ -154,10 +158,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // MOBILE CLICK
     dropdown.addEventListener('click', function () {
         if(window.innerWidth <= 768){
-            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+            submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
         }
     });
 
