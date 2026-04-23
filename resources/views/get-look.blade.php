@@ -117,7 +117,7 @@ nav a{
 
     @foreach($looks as $look)
         <div class="card">
-            <img src="{{ asset('images/looks/'.$look->image) }}">
+            <img src="{{ asset('images/'.$look->image) }}">
         </div>
     @endforeach
 
