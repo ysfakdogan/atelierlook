@@ -112,7 +112,7 @@ Route::get('/image/{path}', function ($path) {
 // =====================================================
 // 🔥 ADMIN PANEL
 // =====================================================
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -121,7 +121,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('mail');
 
     Route::post('/mail/send', [MailController::class, 'send'])->name('mail.send');
-
 
     Route::get('/lead-search', [LeadSearchController::class, 'index'])->name('lead.search');
     Route::post('/lead-search', [LeadSearchController::class, 'search'])->name('lead.search.run');
@@ -135,13 +134,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/lead-delete/{id}', [LeadSearchController::class, 'destroy'])
         ->name('lead.delete');
 
-
-    // STYLISTS
     Route::get('/stylists', [AdminStylistController::class,'index'])->name('stylist.index');
     Route::get('/stylists/create', [AdminStylistController::class,'create'])->name('stylist.create');
     Route::post('/stylists', [AdminStylistController::class,'store'])->name('stylist.store');
     Route::delete('/stylists/{id}', [AdminStylistController::class,'destroy'])->name('stylist.destroy');
-
 
     Route::view('/styling', 'admin.styling')->name('styling');
 
@@ -165,8 +161,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     })->name('styling.store');
 
-
-    // 🔥 GET THE LOOK
     Route::get('/get-the-look', function () {
 
         $looks = Look::latest()->get();
@@ -178,12 +172,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/get-the-look', [UploadController::class, 'store'])
         ->name('getthelook.store');
 
-    // ✅ EKLENEN DELETE ROUTE
     Route::delete('/get-the-look/{id}', function($id){
         \App\Models\Look::find($id)?->delete();
         return back();
     })->name('getthelook.delete');
-
 
     Route::get('/settings', [SeoController::class, 'index'])->name('settings');
     Route::post('/settings', [SeoController::class, 'store'])->name('settings.store');
@@ -201,3 +193,5 @@ Route::get('/sitemap.xml', function () {
         ->header('Content-Type', 'text/xml');
 
 });
+
+require __DIR__.'/auth.php';

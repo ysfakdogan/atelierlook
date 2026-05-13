@@ -59,9 +59,13 @@
     </div>
 
     <div class="p-4 border-t border-gray-800">
-        <a href="/logout" class="block text-center bg-red-600 py-2 rounded">
-            Çıkış
-        </a>
+        <<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="block w-full text-center bg-red-600 py-2 rounded">
+        Çıkış
+    </button>
+    </form>
+
     </div>
 
 </aside>

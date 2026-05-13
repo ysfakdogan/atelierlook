@@ -1,0 +1,54 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#5528
+    [34mall[39m: [
+      [34;4mApp\Models\User[39;24m {#5529
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: "[32mYusuf[39m",
+        [34memail[39m: "[32myusuf@test.com[39m",
+        [34musername[39m: "[32myusuf[39m",
+        [34memail_verified_at[39m: [36mnull[39m,
+        #[33mpassword[39m: "[32m$2y$12$V5Wt9hDTESvlTOivnvUFp.Zhb/CzQDR13fvFyy3.sMvvMgHsxW1P6[39m",
+        #[33mremember_token[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2026-04-24 21:26:25[39m",
+        [34mupdated_at[39m: "[32m2026-04-24 21:42:16[39m",
+      },
+      [34;4mApp\Models\User[39;24m {#5991
+        [34mid[39m: [35m2[39m,
+        [34mname[39m: "[32mRojda[39m",
+        [34memail[39m: "[32mrojda@test.com[39m",
+        [34musername[39m: "",
+        [34memail_verified_at[39m: [36mnull[39m,
+        #[33mpassword[39m: "[32m$2y$12$u3ssGeWDeZw8jsrr2q3J8el30uiiXSsMsuxNrp5d..BS0EYiNA6oy[39m",
+        #[33mremember_token[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2026-04-24 21:26:34[39m",
+        [34mupdated_at[39m: "[32m2026-04-24 21:26:34[39m",
+      },
+    ],
+  }
+
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6269
+    [34mall[39m: [
+      [34;4mApp\Models\User[39;24m {#6270
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: "[32mYusuf[39m",
+        [34memail[39m: "[32myusuf@test.com[39m",
+        [34musername[39m: "[32myusuf[39m",
+        [34memail_verified_at[39m: [36mnull[39m,
+        #[33mpassword[39m: "[32m$2y$12$V5Wt9hDTESvlTOivnvUFp.Zhb/CzQDR13fvFyy3.sMvvMgHsxW1P6[39m",
+        #[33mremember_token[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2026-04-24 21:26:25[39m",
+        [34mupdated_at[39m: "[32m2026-04-24 21:42:16[39m",
+      },
+      [34;4mApp\Models\User[39;24m {#5580
+        [34mid[39m: [35m2[39m,
+        [34mname[39m: "[32mRojda[39m",
+        [34memail[39m: "[32mrojda@test.com[39m",
+        [34musername[39m: "[32mrojda[39m",
+        [34memail_verified_at[39m: [36mnull[39m,
+        #[33mpassword[39m: "[32m$2y$12$u3ssGeWDeZw8jsrr2q3J8el30uiiXSsMsuxNrp5d..BS0EYiNA6oy[39m",
+        #[33mremember_token[39m: [36mnull[39m,
+        [34mcreated_at[39m: "[32m2026-04-24 21:26:34[39m",
+        [34mupdated_at[39m: "[32m2026-04-24 21:46:10[39m",
+      },
+    ],
+  }
+
